@@ -1,0 +1,134 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    width: 100%;
+    height: auto;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333; 
+    padding: 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+
+body.dark-mode {
+    background-color: #121212;
+    color: #f4f4f4;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+#search-input {
+    padding: 10px;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.movies-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.movie-card {
+    flex: 0 1 calc(25% - 20px);  
+    display: flex;
+    flex-direction: column;    
+    align-items: center;        
+    background-color: #f4f4f4;  
+    border-radius: 8px;         
+    padding: 10px;              
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
+    transition: background-color 0.3s; 
+}
+
+body.dark-mode .movie-card {
+    background-color: #000; 
+}
+
+#watchlist {
+    background-color: #fff;
+    color: #000;
+    width: fit-content;
+    height: 50%;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.movie-images {
+    object-fit: cover;
+    border-radius: 5px; 
+    width: 100%;
+    height: 100px; 
+}
+
+.movie-card:hover {
+    transform: scale(1.05);
+}
+
+.movie-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.movie-title {
+    font-size: 1rem;
+    margin: 10px 0;
+}
+
+.movie-detail {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.button {
+    background-color: orange;
+    cursor: pointer;
+    border-radius: 9px;
+    width: 100%;
+    color: #fff;
+    outline: none;
+    border: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.button:hover {
+    background-color: #fff;
+    color: orange;
+}
+
+.movie-rating {
+    color: grey;
+}
+
+.watch-list {
+    display: flex;
+    flex-wrap: wrap;         
+    gap: 20px;               
+    justify-content: center; 
+    padding: 20px;           
+}
+
+@media (max-width: 600px) {
+    .movie-card {
+        width: 100%;
+    }
+}
+

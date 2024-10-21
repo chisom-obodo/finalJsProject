@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Movie Mania</h1>
+        <input type="text" id="search-input" placeholder="Search for movies" autocomplete="on">
+        <button id="theme-toggle" class="button">Toggle Theme</button>
+
+    </header>
+
+    <main>
+        <section id="trending">
+            <div id="trending-movies" class="movie-list"></div>
+        </section>
+
+        <section id="watchlist">
+            <h2>Your Watchlist</h2>
+            <div id="watchlist-movies" class="movie-list"></div>
+        </section>
+        <section id="movies-container">
+            <div class="movies-container"></div>
+        </section>
+
+        
+    </main>
+
+    <script src="main.js"></script>
+</body>
+</html>
