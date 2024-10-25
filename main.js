@@ -33,6 +33,19 @@ const fetchData = async () => {
     console.log(error);
   }
 };
+//
+
+const fetchMoviesByGenre = async (genreURL) => {
+  try {
+    const response = await fetch(genreURL);
+    const data = await response.json();
+    return data.results; // Return movie results from the API
+  } catch (error) {
+    console.error("Error fetching movies:", error);
+  }
+};
+
+//
 
 // Function to display movies
 const displayMovies = (movies, category) => {
@@ -72,7 +85,7 @@ const displayMovies = (movies, category) => {
 
     const addToWatchlistBtn = document.createElement("button");
     addToWatchlistBtn.textContent = "Add to Watchlist";
-    addToWatchlistBtn.classList.add("button")
+    addToWatchlistBtn.classList.add("button");
     addToWatchlistBtn.addEventListener("click", () => {
       addToWatchlist(movie);
     });
@@ -84,6 +97,66 @@ const displayMovies = (movies, category) => {
   categorySection.appendChild(movieList);
   moviesContainer.appendChild(categorySection);
 };
+// function to search for movies
+
+const search = document.querySelector("#search-input");
+search.addEventListener("input", (e) => {
+  const searchTerm = e.target.value.toLowerCase();
+  const searchResult = MOVIE.filter((movie) => {
+    return movie.title.toLowerCase().includes(searchTerm);
+  });
+  console.log(searchResult);
+});
+
+
+// function to filter movies
+
+const filterMovies = (movies) => {
+  const movieFilter = document.getElementById("filter-movie");
+  movieFilter.innerHTML = "";
+
+  movies.forEach(movie => {
+    const movieItem = document.createElement("div");
+    movieItem.classList.add("movie-item");
+
+    movieItem.innerHTML = `
+      <h3>${movie.title}</h3>
+      <img src="https://image.tmdb.org/t/p/w200${movie.poster_path}" alt="${movie.title}">
+    `;
+    
+    movieFilter.appendChild(movieItem); 
+  });
+};
+const movieFilter = document.getElementById("movie-filter");
+movieFilter.addEventListener("change", async (e) => {
+  const selectedValue = e.target.value;
+  let genreURL;
+
+  switch (selectedValue) {
+    case "trending":
+      genreURL = getTrendingMovieURL;
+      break;
+    case "comedy":
+      genreURL = getComedyMovieURL;
+      break;
+    case "romance":
+      genreURL = getRomanceMovieURL;
+      break;
+    case "action":
+      genreURL = getActionMovieURL;
+      break;
+    case "horror":
+      genreURL = getHorrorMovieURL;
+      break;
+    default:
+      genreURL = getTrendingMovieURL; 
+  }
+  const movies = await fetchMoviesByGenre(genreURL);
+  filterMovies(movies);
+});
+
+
+
 
 // Add to watchlist function
 const addToWatchlist = (movie) => {
@@ -98,12 +171,11 @@ const addToWatchlist = (movie) => {
   }
 };
 
-
 // Display the movies in the watchlist
 const displayWatchlist = () => {
   const watchlistContainer = document.getElementById("watchlist-movies");
-  watchlistContainer.classList.add("watch-list")
-  watchlistContainer.innerHTML = ""; 
+  watchlistContainer.classList.add("watch-list");
+  watchlistContainer.innerHTML = "";
 
   const watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
 
@@ -122,7 +194,7 @@ const displayWatchlist = () => {
     movieCard.appendChild(movieTitle);
 
     const removeFromWatchlistBtn = document.createElement("button");
-    removeFromWatchlistBtn.classList.add("button")
+    removeFromWatchlistBtn.classList.add("button");
     removeFromWatchlistBtn.textContent = "Remove from Watchlist";
     removeFromWatchlistBtn.addEventListener("click", () => {
       removeFromWatchlist(movie.id);
@@ -139,27 +211,27 @@ const removeFromWatchlist = (movieId) => {
   localStorage.setItem("watchlist", JSON.stringify(watchlist));
   displayWatchlist();
 };
-// Function to apply theme based on time
-const applyThemeBasedOnTime = () => {
-  const hour = new Date().getHours(); 
+// Function to apply theme
+const applyTheme = () => {
+  const hour = new Date().getHours();
 
   if (hour >= 7 && hour <= 18) {
-      document.body.classList.remove('dark-mode'); 
+    document.body.classList.remove("dark-mode");
   } else {
-      document.body.classList.add('dark-mode'); 
+    document.body.classList.add("dark-mode");
   }
 };
 
 const toggleTheme = () => {
-  document.body.classList.toggle('dark-mode');
+  document.body.classList.toggle("dark-mode");
 };
 
-document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
-document.addEventListener('DOMContentLoaded', () => {
-  applyThemeBasedOnTime();
+document.getElementById("theme-toggle").addEventListener("click", toggleTheme);
+document.addEventListener("DOMContentLoaded", () => {
+  applyTheme();
 });
 // Fetch and display movies when the page loads
 document.addEventListener("DOMContentLoaded", async () => {
   await fetchData();
-  displayWatchlist(); 
+  displayWatchlist();
 });

@@ -10,8 +10,16 @@
     <header>
         <h1>Movie Mania</h1>
         <input type="text" id="search-input" placeholder="Search for movies" autocomplete="on">
-        <button id="theme-toggle" class="button">Toggle Theme</button>
-
+        <button id="theme-toggle" class="button-toggle">Mode</button>
+        <select name="" id="movie-filter">
+            <option value="" selected> Genre</option>
+            <option value="trending">Trending</option>
+            <option value="comedy">Comedy</option>
+            <option value="romance">Romance</option>
+            <option value="action">Action</option>
+            <option value="horror">Horror</option>
+        </select>
+        <div id="filter-movie"></div>
     </header>
 
     <main>
