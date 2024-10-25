@@ -121,7 +121,7 @@ const filterMovies = (movies) => {
 
     movieItem.innerHTML = `
       <h3>${movie.title}</h3>
-      <img src="https://image.tmdb.org/t/p/w200${movie.poster_path}" alt="${movie.title}">
+      <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
     `;
     
     movieFilter.appendChild(movieItem); 
